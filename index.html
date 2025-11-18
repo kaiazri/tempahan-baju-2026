@@ -6,112 +6,23 @@
   <title>Sistem Tempahan Baju Sekolah</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-     body {
-       box-sizing: border-box;
-     }
-     
-     /* Kelas .gradient-bg dan .btn-primary tidak lagi digunakan */
-     
-     .card-shadow {
-       box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-     }
-     
-     .input-focus:focus {
-       border-color: #059669;
-       box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
-     }
-     
-     .fade-in {
-       animation: fadeIn 0.6s ease-out;
-     }
-     
-     @keyframes fadeIn {
-       from { opacity: 0; transform: translateY(20px); }
-       to { opacity: 1; transform: translateY(0); }
-     }
-     
-     .loading {
-       display: inline-block;
-       width: 20px;
-       height: 20px;
-       border: 3px solid #ffffff;
-       border-radius: 50%;
-       border-top-color: transparent;
-       animation: spin 1s ease-in-out infinite;
-     }
-     
-     @keyframes spin {
-       to { transform: rotate(360deg); }
-     }
-     
-     .fieldset-style {
-       border: 2px solid #e5e7eb;
-       border-radius: 12px;
-       padding: 24px;
-       margin-bottom: 24px;
-       background: #ffffff;
-     }
-     
-     .legend-style {
-       background: #059669;
-       color: white;
-       padding: 8px 16px;
-       border-radius: 8px;
-       font-weight: bold;
-       font-size: 1.1rem;
-     }
-     
-     .summary-box {
-       background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
-       border: 2px solid #059669;
-       border-radius: 12px;
-       padding: 20px;
-       margin: 16px 0;
-     }
-     
-     .radio-group {
-       display: flex;
-   _gap: 20px;
-       margin: 12px 0;
-     }
-     
-     .radio-group input[type="radio"] {
-       margin-right: 8px;
-     }
-     
-     .bank-info {
-       background: #fef3c7;
-       border: 2px solid #f59e0b;
-       border-radius: 12px;
-       padding: 20px;
-       margin: 16px 0;
-     }
-
-     .toast {
-       position: fixed;
-       top: 20px;
-       right: 20px;
-       padding: 16px 24px;
-       border-radius: 8px;
-       color: white;
-       font-weight: 600;
-       z-index: 1000;
-       max-width: 400px;
-       animation: slideIn 0.3s ease-out;
-     }
-
-     .toast.success {
-       background: #10b981;
-     }
-
-     .toast.error {
-       background: #ef4444;
-     }
-
-     @keyframes slideIn {
-       from { transform: translateX(100%); opacity: 0; }
-       to { transform: translateX(0); opacity: 1; }
-     }
+    body { box-sizing: border-box; }
+    .card-shadow { box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+    .input-focus:focus { border-color: #059669; box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1); }
+    .fade-in { animation: fadeIn 0.6s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .loading { display: inline-block; width: 20px; height: 20px; border: 3px solid #ffffff; border-radius: 50%; border-top-color: transparent; animation: spin 1s ease-in-out infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .fieldset-style { border: 2px solid #e5e7eb; border-radius: 12px; padding: 24px; margin-bottom: 24px; background: #ffffff; }
+    .legend-style { background: #059669; color: white; padding: 8px 16px; border-radius: 8px; font-weight: bold; font-size: 1.1rem; }
+    .summary-box { background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); border: 2px solid #059669; border-radius: 12px; padding: 20px; margin: 16px 0; }
+    .radio-group { display: flex; gap: 20px; margin: 12px 0; }
+    .radio-group input[type="radio"] { margin-right: 8px; }
+    .bank-info { background: #fef3c7; border: 2px solid #f59e0b; border-radius: 12px; padding: 20px; margin: 16px 0; }
+    .toast { position: fixed; top: 20px; right: 20px; padding: 16px 24px; border-radius: 8px; color: white; font-weight: 600; z-index: 1000; max-width: 400px; animation: slideIn 0.3s ease-out; }
+    .toast.success { background: #10b981; }
+    .toast.error { background: #ef4444; }
+    @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
   </style>
   <style>@view-transition { navigation: auto; }</style>
  </head>
@@ -121,17 +32,19 @@
    <div class="container mx-auto px-6">
     <div class="text-center">
      <h1 class="text-4xl md:text-5xl font-bold mb-2">SK Pandan Jaya</h1>
-     <p class="text-2xl mb-2">Borang Tempahan Baju Sukan dan PJ</p>
+     <p class="text-2xl mb-2">Borang Tempahan Baju PJ</p>
      <p class="text-xl text-green-100">Sesi 2026</p>
      <div class="mt-4 inline-block bg-white bg-opacity-20 rounded-full px-6 py-2"><span class="text-lg font-semibold">💰 RM30.00 sehelai</span>
      </div>
     </div>
    </div>
   </header>
+
   <main class="container mx-auto px-6 py-8">
    <div class="max-w-4xl mx-auto">
     <div class="bg-white rounded-2xl card-shadow p-8 mb-8 fade-in">
      <form id="orderForm" class="space-y-6">
+      
       <fieldset class="fieldset-style"><legend class="legend-style">A. Maklumat Murid</legend>
        <div class="grid md:grid-cols-2 gap-6 mt-6">
         <div><label for="nama_murid" class="block text-sm font-semibold text-gray-700 mb-2"> 1. Nama Murid <span class="text-red-500">*</span> </label> <input type="text" id="nama_murid" name="nama_murid" required class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition-all">
@@ -142,138 +55,34 @@
        <div class="mt-6"><label for="kelas" class="block text-sm font-semibold text-gray-700 mb-2"> 3. Kelas <span class="text-red-500">*</span> </label> <select id="kelas" name="kelas" required class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition-all"> <option value="">Sila Pilih Kelas</option> <optgroup label="Tahun 1"> <option value="1 Berlian">1 Berlian</option> <option value="1 Nilam">1 Nilam</option> <option value="1 Permata">1 Permata</option> <option value="1 Zamrud">1 Zamrud</option> </optgroup> <optgroup label="Tahun 2"> <option value="2 Berlian">2 Berlian</option> <option value="2 Nilam">2 Nilam</option> <option value="2 Permata">2 Permata</option> <option value="2 Zamrud">2 Zamrud</option> </optgroup> <optgroup label="Tahun 3"> <option value="3 Berlian">3 Berlian</option> <option value="3 Nilam">3 Nilam</option> <option value="3 Permata">3 Permata</option> <option value="3 Zamrud">3 Zamrud</option> </optgroup> <optgroup label="Tahun 4"> <option value="4 Berlian">4 Berlian</option> <option value="4 Nilam">4 Nilam</option> <option value="4 Permata">4 Permata</option> <option value="4 Zamrud">4 Zamrud</option> </optgroup> <optgroup label="Tahun 5"> <option value="5 Berlian">5 Berlian</option> <option value="5 Nilam">5 Nilam</option> <option value="5 Permata">5 Permata</option> <option value="5 Zamrud">5 Zamrud</option> </optgroup> <optgroup label="Tahun 6"> <option value="6 Berlian">6 Berlian</option> <option value="6 Nilam">6 Nilam</option> <option value="6 Permata">6 Permata</option> <option value="6 Zamrud">6 Zamrud</option> </optgroup> </select>
        </div>
       </fieldset>
-      <fieldset class="fieldset-style"><legend class="legend-style">B. Tempahan Baju PJ (Pendidikan Jasmani)</legend> <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+
+      <fieldset class="fieldset-style"><legend class="legend-style">B. Tempahan Baju PJ (Pendidikan Jasmani)</legend>
+       <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
         <h4 class="font-bold text-blue-800 mb-3 flex items-center">📏 Panduan Saiz Baju (Size Chart) <button type="button" onclick="toggleSizeChart()" class="ml-2 text-blue-600 hover:text-blue-800">
          <svg id="chart-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
          </svg></button></h4>
         <div id="size-chart" class="hidden">
-         <div class="grid md:grid-cols-2 gap-6"><div class="bg-white p-4 rounded-lg border">
+         <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white p-4 rounded-lg border">
            <h5 class="font-semibold text-gray-800 mb-3 text-center">👶 Saiz Kanak-kanak</h5>
            <div class="space-y-3">
-            <div class="p-2 bg-gray-50 rounded">
-             <div class="font-medium mb-1">
-              Saiz 24
-             </div>
-             <div class="text-xs text-gray-600 space-y-1">
-              <div>
-               Bahu: 10" | Dada: 12" | Panjang: 18"
-              </div>
-             </div>
-            </div>
-            <div class="p-2 bg-gray-50 rounded">
-             <div class="font-medium mb-1">
-              Saiz 26
-             </div>
-             <div class="text-xs text-gray-600 space-y-1">
-              <div>
-               Bahu: 11" | Dada: 13" | Panjang: 19"
-              </div>
-             </div>
-            </div>
-            <div class="p-2 bg-gray-50 rounded">
-             <div class="font-medium mb-1">
-              Saiz 28
-             </div>
-             <div class="text-xs text-gray-600 space-y-1">
-              <div>
-               Bahu: 12" | Dada: 14" | Panjang: 20"
-              </div>
-             </div>
-            </div>
-            <div class="p-2 bg-gray-50 rounded">
-             <div class="font-medium mb-1">
-              Saiz 30
-             </div>
-             <div class="text-xs text-gray-600 space-y-1">
-              <div>
-               Bahu: 13" | Dada: 15" | Panjang: 21"
-              </div>
-             </div>
-            </div>
-            <div class="p-2 bg-gray-50 rounded">
-             <div class="font-medium mb-1">
-              Saiz 32
-             </div>
-             <div class="text-xs text-gray-600 space-y-1">
-              <div>
-               Bahu: 14" | Dada: 16" | Panjang: 22"
-              </div>
-             </div>
-            </div>
+            <div class="p-2 bg-gray-50 rounded"><div class="font-medium mb-1">Saiz 24</div><div class="text-xs text-gray-600">Bahu: 10" | Dada: 12" | Panjang: 18"</div></div>
+            <div class="p-2 bg-gray-50 rounded"><div class="font-medium mb-1">Saiz 26</div><div class="text-xs text-gray-600">Bahu: 11" | Dada: 13" | Panjang: 19"</div></div>
+            <div class="p-2 bg-gray-50 rounded"><div class="font-medium mb-1">Saiz 28</div><div class="text-xs text-gray-600">Bahu: 12" | Dada: 14" | Panjang: 20"</div></div>
+            <div class="p-2 bg-gray-50 rounded"><div class="font-medium mb-1">Saiz 30</div><div class="text-xs text-gray-600">Bahu: 13" | Dada: 15" | Panjang: 21"</div></div>
+            <div class="p-2 bg-gray-50 rounded"><div class="font-medium mb-1">Saiz 32</div><div class="text-xs text-gray-600">Bahu: 14" | Dada: 16" | Panjang: 22"</div></div>
            </div>
-          </div><div class="bg-white p-4 rounded-lg border">
+          </div>
+          <div class="bg-white p-4 rounded-lg border">
            <h5 class="font-semibold text-gray-800 mb-3 text-center">👨‍👩‍👧‍👦 Saiz Dewasa</h5>
            <div class="space-y-3">
-            <div class="p-2 bg-gray-50 rounded">
-             <div class="font-medium mb-1">
-              XS
-             </div>
-             <div class="text-xs text-gray-600 space-y-1">
-              <div>
-               Bahu: 15" | Dada: 17" | Panjang: 23.5"
-              </div>
-             </div>
-            </div>
-            <div class="p-2 bg-gray-50 rounded">
-             <div class="font-medium mb-1">
-              S
-             </div>
-             <div class="text-xs text-gray-600 space-y-1">
-              <div>
-               Bahu: 17.5" | Dada: 19.5" | Panjang: 25.5"
-              </div>
-             </div>
-            </div>
-            <div class="p-2 bg-gray-50 rounded">
-             <div class="font-medium mb-1">
-              M
-             </div>
-             <div class="text-xs text-gray-600 space-y-1">
-              <div>
-               Bahu: 18" | Dada: 20.5" | Panjang: 26.5"
-              </div>
-             </div>
-            </div>
-            <div class="p-2 bg-gray-50 rounded">
-             <div class="font-medium mb-1">
-              L
-             </div>
-             <div class="text-xs text-gray-600 space-y-1">
-              <div>
-               Bahu: 18.5" | Dada: 21.5" | Panjang: 27.5"
-              </div>
-             </div>
-            </div>
-            <div class="p-2 bg-gray-50 rounded">
-             <div class="font-medium mb-1">
-              XL
-             </div>
-             <div class="text-xs text-gray-600 space-y-1">
-              <div>
-               Bahu: 19.5" | Dada: 22.5" | Panjang: 28.5"
-              </div>
-             </div>
-            </div>
-            <div class="p-2 bg-gray-50 rounded">
-             <div class="font-medium mb-1">
-              2XL
-             </div>
-             <div class="text-xs text-gray-600 space-y-1">
-              <div>
-               Bahu: 20" | Dada: 23" | Panjang: 29.5"
-              </div>
-             </div>
-            </div>
-            <div class="p-2 bg-gray-50 rounded">
-             <div class="font-medium mb-1">
-              3XL
-             </div>
-             <div class="text-xs text-gray-600 space-y-1">
-              <div>
-               Bahu: 22" | Dada: 24.5" | Panjang: 30.5"
-              </div>
-             </div>
-            </div>
+            <div class="p-2 bg-gray-50 rounded"><div class="font-medium mb-1">XS</div><div class="text-xs text-gray-600">Bahu: 15" | Dada: 17" | Panjang: 23.5"</div></div>
+            <div class="p-2 bg-gray-50 rounded"><div class="font-medium mb-1">S</div><div class="text-xs text-gray-600">Bahu: 17.5" | Dada: 19.5" | Panjang: 25.5"</div></div>
+            <div class="p-2 bg-gray-50 rounded"><div class="font-medium mb-1">M</div><div class="text-xs text-gray-600">Bahu: 18" | Dada: 20.5" | Panjang: 26.5"</div></div>
+            <div class="p-2 bg-gray-50 rounded"><div class="font-medium mb-1">L</div><div class="text-xs text-gray-600">Bahu: 18.5" | Dada: 21.5" | Panjang: 27.5"</div></div>
+            <div class="p-2 bg-gray-50 rounded"><div class="font-medium mb-1">XL</div><div class="text-xs text-gray-600">Bahu: 19.5" | Dada: 22.5" | Panjang: 28.5"</div></div>
+            <div class="p-2 bg-gray-50 rounded"><div class="font-medium mb-1">2XL</div><div class="text-xs text-gray-600">Bahu: 20" | Dada: 23" | Panjang: 29.5"</div></div>
+            <div class="p-2 bg-gray-50 rounded"><div class="font-medium mb-1">3XL</div><div class="text-xs text-gray-600">Bahu: 22" | Dada: 24.5" | Panjang: 30.5"</div></div>
            </div>
           </div>
          </div>
@@ -286,20 +95,13 @@
         </div>
        </div>
       </fieldset>
-      <fieldset class="fieldset-style"><legend class="legend-style">C. Tempahan Baju Sukan (T-Shirt Berkolar)</legend>
-       <div class="grid md:grid-cols-2 gap-6 mt-6">
-        <div><label for="kuantiti_sukan" class="block text-sm font-semibold text-gray-700 mb-2"> 1. Kuantiti Baju Sukan </label> <select id="kuantiti_sukan" name="kuantiti_sukan" class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition-all"> <option value="0">0</option> <option value="1">1</option> <option value="2">2</option> <option value="3">3</option> <option value="4">4</option> <option value="5">5</option> </select>
-        </div>
-        <div id="size_sukan_section" style="display: none;"><label for="saiz_sukan" class="block text-sm font-semibold text-gray-700 mb-2"> 2. Saiz Baju Sukan <span class="text-red-500">*</span> </label> <select id="saiz_sukan" name="saiz_sukan" class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition-all"> <option value="">Sila Pilih Saiz</option> <optgroup label="Saiz Kanak-kanak"> <option value="24">24</option> <option value="26">26</option> <option value="28">28</option> <option value="30">30</option> <option value="32">32</option> </optgroup> <optgroup label="Saiz Dewasa"> <option value="XS">XS</option> <option value="S">S</option> <option value="M">M</option> <option value="L">L</option> <option value="XL">XL</option> <option value="2XL">2XL</option> <option value="3XL">3XL</option> </optgroup> </select>
-        </div>
-       </div>
-      </fieldset>
-      <fieldset class="fieldset-style"><legend class="legend-style">D. Pembayaran &amp; Pengesahan</legend>
+      
+      <fieldset class="fieldset-style"><legend class="legend-style">C. Pembayaran &amp; Pengesahan</legend>
        <div class="mt-6">
         <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">💵 Maklumat Harga</h3>
-        <p class="text-gray-600 mb-4">Harga bagi <strong>sehelai</strong> Baju PJ atau Baju Sukan, tanpa mengira saiz, ialah <strong>RM30.00</strong>.</p>
+        <p class="text-gray-600 mb-4">Harga bagi <strong>sehelai</strong> Baju PJ ialah <strong>RM30.00</strong>.</p>
         <div class="summary-box">
-         <div class="flex justify-between items-center mb-2"><span class="font-semibold">Jumlah Kuantiti Baju (PJ + Sukan):</span> <span id="total_quantity" class="text-xl font-bold text-green-600">0 helai</span>
+         <div class="flex justify-between items-center mb-2"><span class="font-semibold">Jumlah Kuantiti Baju PJ:</span> <span id="total_quantity" class="text-xl font-bold text-green-600">0 helai</span>
          </div>
          <div class="flex justify-between items-center"><span class="font-semibold text-lg">Jumlah Keseluruhan:</span> <span class="text-2xl font-bold text-green-600">RM <span id="total_price">0.00</span></span>
          </div><input type="hidden" id="final_total_price" name="jumlah_keseluruhan" value="0.00">
@@ -375,7 +177,7 @@
          </svg><span>Tambah Tempahan Baru</span> </button>
        </div>
       </div>
-      </form>
+     </form>
     </div><div id="success-section" class="bg-white rounded-2xl card-shadow p-8 fade-in" style="display: none;">
      <div class="text-center py-8">
       <div class="bg-green-50 border border-green-200 rounded-lg p-6">
@@ -393,12 +195,11 @@
     // === URL ANDA TELAH DIMASUKKAN DI SINI ===
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzkbcns6ATs-VTEfH9VAMg8xYye9WcV7ndwMoTiRxEUYfvtGnA2StENOdgqOARqzxocsQ/exec";
 
-    // Utility functions (Fungsi-fungsi ini kebanyakannya sama seperti kod asal anda)
     function calculateTotal() {
       const kuantitiPj = parseInt(document.getElementById('kuantiti_pj').value) || 0;
-      const kuantitiSukan = parseInt(document.getElementById('kuantiti_sukan').value) || 0;
+      // Baju sukan dibuang dari kiraan
       
-      const totalQuantity = kuantitiPj + kuantitiSukan;
+      const totalQuantity = kuantitiPj;
       const pricePerShirt = 30.00;
       const totalPrice = totalQuantity * pricePerShirt;
 
@@ -469,7 +270,6 @@
 
       const reader = new FileReader();
       reader.onload = function(e) {
-        // Simpan data Base64, nama fail, dan jenis fail untuk dihantar
         input.dataset.fileData = e.target.result;
         input.dataset.fileName = file.name;
         input.dataset.fileType = file.type;
@@ -522,58 +322,36 @@
         kelas: document.getElementById('kelas').value,
         kuantiti_pj: parseInt(document.getElementById('kuantiti_pj').value) || 0,
         saiz_pj: document.getElementById('saiz_pj').value || "",
-        kuantiti_sukan: parseInt(document.getElementById('kuantiti_sukan').value) || 0,
-        saiz_sukan: document.getElementById('saiz_sukan').value || "",
+        // Tetapkan Baju Sukan kepada 0/kosong supaya Google Sheet tidak rosak
+        kuantiti_sukan: 0,
+        saiz_sukan: "",
         mode_pembayaran: document.querySelector('input[name="mode_pembayaran"]:checked')?.value || "",
         no_telefon: document.getElementById('no_telefon').value.trim(),
         nota_pembayaran: document.getElementById('nota_pembayaran').value.trim()
       };
       
-      const totalQuantity = orderData.kuantiti_pj + orderData.kuantiti_sukan;
+      // Total quantity hanya PJ
+      const totalQuantity = orderData.kuantiti_pj;
 
-      // Validasi (sama seperti kod asal)
-      if (!orderData.nama_murid) {
-        showToast("Sila masukkan nama murid.", "error");
-        resetSubmitButton();
-        return;
-      }
-      if (!orderData.jantina) {
-        showToast("Sila pilih jantina.", "error");
-        resetSubmitButton();
-        return;
-      }
-      if (!orderData.kelas) {
-        showToast("Sila pilih kelas.", "error");
-        resetSubmitButton();
-        return;
-      }
+      if (!orderData.nama_murid) { showToast("Sila masukkan nama murid.", "error"); resetSubmitButton(); return; }
+      if (!orderData.jantina) { showToast("Sila pilih jantina.", "error"); resetSubmitButton(); return; }
+      if (!orderData.kelas) { showToast("Sila pilih kelas.", "error"); resetSubmitButton(); return; }
+      
       if (totalQuantity === 0) {
         showToast("Sila pilih sekurang-kurangnya satu baju untuk ditempah.", "error");
         resetSubmitButton();
         return;
       }
+      
       if (orderData.kuantiti_pj > 0 && !orderData.saiz_pj) {
         showToast("Sila pilih saiz baju PJ.", "error");
         resetSubmitButton();
         return;
       }
-      if (orderData.kuantiti_sukan > 0 && !orderData.saiz_sukan) {
-        showToast("Sila pilih saiz baju sukan.", "error");
-        resetSubmitButton();
-        return;
-      }
-      if (!orderData.mode_pembayaran) {
-        showToast("Sila pilih mode pembayaran.", "error");
-        resetSubmitButton();
-        return;
-      }
-      if (!orderData.no_telefon) {
-        showToast("Sila masukkan nombor telefon.", "error");
-        resetSubmitButton();
-        return;
-      }
 
-      // Semak resit
+      if (!orderData.mode_pembayaran) { showToast("Sila pilih mode pembayaran.", "error"); resetSubmitButton(); return; }
+      if (!orderData.no_telefon) { showToast("Sila masukkan nombor telefon.", "error"); resetSubmitButton(); return; }
+
       const resitInput = document.getElementById('resit_pembayaran');
       if (orderData.mode_pembayaran === 'Online Transfer' && !resitInput.dataset.fileName) {
         showToast("Sila upload resit pembayaran untuk Online Transfer.", "error");
@@ -581,52 +359,44 @@
         return;
       }
       
-      // Tambah baki data untuk dihantar ke Google Apps Script
       const pricePerShirt = 30.00;
       orderData.jumlah_keseluruhan = (totalQuantity * pricePerShirt).toFixed(2);
       orderData.tarikh_tempahan = new Date().toISOString();
       orderData.status = "Menunggu Pengesahan";
 
-      // Tambah data fail (jika ada) untuk dihantar
       if (resitInput.dataset.fileName) {
         orderData.resit_file_name = resitInput.dataset.fileName;
         orderData.resit_file_type = resitInput.dataset.fileType;
-        orderData.resit_file_data = resitInput.dataset.fileData; // Ini data Base64
+        orderData.resit_file_data = resitInput.dataset.fileData;
       }
 
-      // UBAH SUAI UTAMA: Guna 'fetch' untuk hantar ke Google Apps Script
       try {
         const response = await fetch(SCRIPT_URL, {
           method: 'POST',
-          mode: 'cors', // Penting untuk panggilan cross-origin
+          mode: 'cors', 
           body: JSON.stringify(orderData)
         });
 
         const result = await response.json();
 
         if (result.status === "success") {
-          // Berjaya! Lakukan perkara yang sama seperti kod asal
           showToast("Tempahan berjaya dihantar! ✅", "success");
           document.getElementById('orderForm').reset();
           removeFile();
           toggleSize('pj');
-          toggleSize('sukan');
           calculateTotal();
           
           const transferSection = document.getElementById('online_transfer_section');
           transferSection.style.display = 'none';
           
-          // Papar seksyen 'success'
           const successSection = document.getElementById('success-section');
           successSection.style.display = 'block';
           successSection.scrollIntoView({ behavior: 'smooth' });
         } else {
-          // Berlaku ralat di sebelah Google Apps Script
           console.error("Apps Script error:", result.message);
           showToast(`Ralat menyimpan data: ${result.message}. Sila cuba lagi.`, "error");
         }
       } catch (error) {
-        // Berlaku ralat rangkaian atau fetch
         console.error("Submit error:", error);
         showToast(`Ralat sistem: ${error.message}. Sila cuba lagi.`, "error");
       }
@@ -649,10 +419,7 @@
       toast.className = `toast ${type}`;
       toast.textContent = message;
       document.body.appendChild(toast);
-      
-      setTimeout(() => {
-        toast.remove();
-      }, 5000);
+      setTimeout(() => { toast.remove(); }, 5000);
     }
 
     function toggleSizeChart() {
@@ -672,13 +439,11 @@
       document.getElementById('orderForm').reset();
       removeFile();
       toggleSize('pj');
-      toggleSize('sukan');
       calculateTotal();
       
       const transferSection = document.getElementById('online_transfer_section');
       transferSection.style.display = 'none';
       
-      // Sembunyi seksyen 'success'
       const successSection = document.getElementById('success-section');
       successSection.style.display = 'none';
 
@@ -686,33 +451,20 @@
       showToast("Borang baru telah disediakan untuk tempahan seterusnya!", "success");
     }
 
-    // Event Listeners
     document.addEventListener('DOMContentLoaded', () => {
-      // Tiada lagi 'initializeDataSDK()'
-      
       const form = document.getElementById('orderForm');
-      if (form) {
-        form.addEventListener('submit', handleSubmit);
-      }
+      if (form) { form.addEventListener('submit', handleSubmit); }
       
-      // Handler muat naik fail
       const fileInput = document.getElementById('resit_pembayaran');
-      if (fileInput) {
-        fileInput.addEventListener('change', (e) => handleFileUpload(e.target));
-      }
+      if (fileInput) { fileInput.addEventListener('change', (e) => handleFileUpload(e.target)); }
       
-      // Logik Kuantiti/Saiz
       document.getElementById('kuantiti_pj').addEventListener('change', () => toggleSize('pj'));
-      document.getElementById('kuantiti_sukan').addEventListener('change', () => toggleSize('sukan'));
       
-      // Logik Pembayaran
       document.querySelectorAll('input[name="mode_pembayaran"]').forEach(radio => {
         radio.addEventListener('change', togglePaymentSection);
       });
       
-      // Persediaan awal
       toggleSize('pj');
-      toggleSize('sukan');
       calculateTotal();
     });
   </script>
