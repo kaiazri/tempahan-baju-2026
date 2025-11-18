@@ -1,0 +1,720 @@
+<!doctype html>
+<html lang="ms" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistem Tempahan Baju Sekolah</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+     body {
+       box-sizing: border-box;
+     }
+     
+     /* Kelas .gradient-bg dan .btn-primary tidak lagi digunakan */
+     
+     .card-shadow {
+       box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+     }
+     
+     .input-focus:focus {
+       border-color: #059669;
+       box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+     }
+     
+     .fade-in {
+       animation: fadeIn 0.6s ease-out;
+     }
+     
+     @keyframes fadeIn {
+       from { opacity: 0; transform: translateY(20px); }
+       to { opacity: 1; transform: translateY(0); }
+     }
+     
+     .loading {
+       display: inline-block;
+       width: 20px;
+       height: 20px;
+       border: 3px solid #ffffff;
+       border-radius: 50%;
+       border-top-color: transparent;
+       animation: spin 1s ease-in-out infinite;
+     }
+     
+     @keyframes spin {
+       to { transform: rotate(360deg); }
+     }
+     
+     .fieldset-style {
+       border: 2px solid #e5e7eb;
+       border-radius: 12px;
+       padding: 24px;
+       margin-bottom: 24px;
+       background: #ffffff;
+     }
+     
+     .legend-style {
+       background: #059669;
+       color: white;
+       padding: 8px 16px;
+       border-radius: 8px;
+       font-weight: bold;
+       font-size: 1.1rem;
+     }
+     
+     .summary-box {
+       background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+       border: 2px solid #059669;
+       border-radius: 12px;
+       padding: 20px;
+       margin: 16px 0;
+     }
+     
+     .radio-group {
+       display: flex;
+   _gap: 20px;
+       margin: 12px 0;
+     }
+     
+     .radio-group input[type="radio"] {
+       margin-right: 8px;
+     }
+     
+     .bank-info {
+       background: #fef3c7;
+       border: 2px solid #f59e0b;
+       border-radius: 12px;
+       padding: 20px;
+       margin: 16px 0;
+     }
+
+     .toast {
+       position: fixed;
+       top: 20px;
+       right: 20px;
+       padding: 16px 24px;
+       border-radius: 8px;
+       color: white;
+       font-weight: 600;
+       z-index: 1000;
+       max-width: 400px;
+       animation: slideIn 0.3s ease-out;
+     }
+
+     .toast.success {
+       background: #10b981;
+     }
+
+     .toast.error {
+       background: #ef4444;
+     }
+
+     @keyframes slideIn {
+       from { transform: translateX(100%); opacity: 0; }
+       to { transform: translateX(0); opacity: 1; }
+     }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+ </head>
+ <body class="h-full bg-gray-50">
+  
+  <header class="bg-gradient-to-br from-emerald-600 to-emerald-700 text-white py-8">
+   <div class="container mx-auto px-6">
+    <div class="text-center">
+     <h1 class="text-4xl md:text-5xl font-bold mb-2">SK Pandan Jaya</h1>
+     <p class="text-2xl mb-2">Borang Tempahan Baju Sukan dan PJ</p>
+     <p class="text-xl text-green-100">Sesi 2026</p>
+     <div class="mt-4 inline-block bg-white bg-opacity-20 rounded-full px-6 py-2"><span class="text-lg font-semibold">💰 RM30.00 sehelai</span>
+     </div>
+    </div>
+   </div>
+  </header>
+  <main class="container mx-auto px-6 py-8">
+   <div class="max-w-4xl mx-auto">
+    <div class="bg-white rounded-2xl card-shadow p-8 mb-8 fade-in">
+     <form id="orderForm" class="space-y-6">
+      <fieldset class="fieldset-style"><legend class="legend-style">A. Maklumat Murid</legend>
+       <div class="grid md:grid-cols-2 gap-6 mt-6">
+        <div><label for="nama_murid" class="block text-sm font-semibold text-gray-700 mb-2"> 1. Nama Murid <span class="text-red-500">*</span> </label> <input type="text" id="nama_murid" name="nama_murid" required class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition-all">
+        </div>
+        <div><label for="jantina" class="block text-sm font-semibold text-gray-700 mb-2"> 2. Jantina <span class="text-red-500">*</span> </label> <select id="jantina" name="jantina" required class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition-all"> <option value="">Sila Pilih</option> <option value="Lelaki">Lelaki</option> <option value="Perempuan">Perempuan</option> </select>
+        </div>
+       </div>
+       <div class="mt-6"><label for="kelas" class="block text-sm font-semibold text-gray-700 mb-2"> 3. Kelas <span class="text-red-500">*</span> </label> <select id="kelas" name="kelas" required class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition-all"> <option value="">Sila Pilih Kelas</option> <optgroup label="Tahun 1"> <option value="1 Berlian">1 Berlian</option> <option value="1 Nilam">1 Nilam</option> <option value="1 Permata">1 Permata</option> <option value="1 Zamrud">1 Zamrud</option> </optgroup> <optgroup label="Tahun 2"> <option value="2 Berlian">2 Berlian</option> <option value="2 Nilam">2 Nilam</option> <option value="2 Permata">2 Permata</option> <option value="2 Zamrud">2 Zamrud</option> </optgroup> <optgroup label="Tahun 3"> <option value="3 Berlian">3 Berlian</option> <option value="3 Nilam">3 Nilam</option> <option value="3 Permata">3 Permata</option> <option value="3 Zamrud">3 Zamrud</option> </optgroup> <optgroup label="Tahun 4"> <option value="4 Berlian">4 Berlian</option> <option value="4 Nilam">4 Nilam</option> <option value="4 Permata">4 Permata</option> <option value="4 Zamrud">4 Zamrud</option> </optgroup> <optgroup label="Tahun 5"> <option value="5 Berlian">5 Berlian</option> <option value="5 Nilam">5 Nilam</option> <option value="5 Permata">5 Permata</option> <option value="5 Zamrud">5 Zamrud</option> </optgroup> <optgroup label="Tahun 6"> <option value="6 Berlian">6 Berlian</option> <option value="6 Nilam">6 Nilam</option> <option value="6 Permata">6 Permata</option> <option value="6 Zamrud">6 Zamrud</option> </optgroup> </select>
+       </div>
+      </fieldset>
+      <fieldset class="fieldset-style"><legend class="legend-style">B. Tempahan Baju PJ (Pendidikan Jasmani)</legend> <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+        <h4 class="font-bold text-blue-800 mb-3 flex items-center">📏 Panduan Saiz Baju (Size Chart) <button type="button" onclick="toggleSizeChart()" class="ml-2 text-blue-600 hover:text-blue-800">
+         <svg id="chart-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+         </svg></button></h4>
+        <div id="size-chart" class="hidden">
+         <div class="grid md:grid-cols-2 gap-6"><div class="bg-white p-4 rounded-lg border">
+           <h5 class="font-semibold text-gray-800 mb-3 text-center">👶 Saiz Kanak-kanak</h5>
+           <div class="space-y-3">
+            <div class="p-2 bg-gray-50 rounded">
+             <div class="font-medium mb-1">
+              Saiz 24
+             </div>
+             <div class="text-xs text-gray-600 space-y-1">
+              <div>
+               Bahu: 10" | Dada: 12" | Panjang: 18"
+              </div>
+             </div>
+            </div>
+            <div class="p-2 bg-gray-50 rounded">
+             <div class="font-medium mb-1">
+              Saiz 26
+             </div>
+             <div class="text-xs text-gray-600 space-y-1">
+              <div>
+               Bahu: 11" | Dada: 13" | Panjang: 19"
+              </div>
+             </div>
+            </div>
+            <div class="p-2 bg-gray-50 rounded">
+             <div class="font-medium mb-1">
+              Saiz 28
+             </div>
+             <div class="text-xs text-gray-600 space-y-1">
+              <div>
+               Bahu: 12" | Dada: 14" | Panjang: 20"
+              </div>
+             </div>
+            </div>
+            <div class="p-2 bg-gray-50 rounded">
+             <div class="font-medium mb-1">
+              Saiz 30
+             </div>
+             <div class="text-xs text-gray-600 space-y-1">
+              <div>
+               Bahu: 13" | Dada: 15" | Panjang: 21"
+              </div>
+             </div>
+            </div>
+            <div class="p-2 bg-gray-50 rounded">
+             <div class="font-medium mb-1">
+              Saiz 32
+             </div>
+             <div class="text-xs text-gray-600 space-y-1">
+              <div>
+               Bahu: 14" | Dada: 16" | Panjang: 22"
+              </div>
+             </div>
+            </div>
+           </div>
+          </div><div class="bg-white p-4 rounded-lg border">
+           <h5 class="font-semibold text-gray-800 mb-3 text-center">👨‍👩‍👧‍👦 Saiz Dewasa</h5>
+           <div class="space-y-3">
+            <div class="p-2 bg-gray-50 rounded">
+             <div class="font-medium mb-1">
+              XS
+             </div>
+             <div class="text-xs text-gray-600 space-y-1">
+              <div>
+               Bahu: 15" | Dada: 17" | Panjang: 23.5"
+              </div>
+             </div>
+            </div>
+            <div class="p-2 bg-gray-50 rounded">
+             <div class="font-medium mb-1">
+              S
+             </div>
+             <div class="text-xs text-gray-600 space-y-1">
+              <div>
+               Bahu: 17.5" | Dada: 19.5" | Panjang: 25.5"
+              </div>
+             </div>
+            </div>
+            <div class="p-2 bg-gray-50 rounded">
+             <div class="font-medium mb-1">
+              M
+             </div>
+             <div class="text-xs text-gray-600 space-y-1">
+              <div>
+               Bahu: 18" | Dada: 20.5" | Panjang: 26.5"
+              </div>
+             </div>
+            </div>
+            <div class="p-2 bg-gray-50 rounded">
+             <div class="font-medium mb-1">
+              L
+             </div>
+             <div class="text-xs text-gray-600 space-y-1">
+              <div>
+               Bahu: 18.5" | Dada: 21.5" | Panjang: 27.5"
+              </div>
+             </div>
+            </div>
+            <div class="p-2 bg-gray-50 rounded">
+             <div class="font-medium mb-1">
+              XL
+             </div>
+             <div class="text-xs text-gray-600 space-y-1">
+              <div>
+               Bahu: 19.5" | Dada: 22.5" | Panjang: 28.5"
+              </div>
+             </div>
+            </div>
+            <div class="p-2 bg-gray-50 rounded">
+             <div class="font-medium mb-1">
+              2XL
+             </div>
+             <div class="text-xs text-gray-600 space-y-1">
+              <div>
+               Bahu: 20" | Dada: 23" | Panjang: 29.5"
+              </div>
+             </div>
+            </div>
+            <div class="p-2 bg-gray-50 rounded">
+             <div class="font-medium mb-1">
+              3XL
+             </div>
+             <div class="text-xs text-gray-600 space-y-1">
+              <div>
+               Bahu: 22" | Dada: 24.5" | Panjang: 30.5"
+              </div>
+             </div>
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="grid md:grid-cols-2 gap-6 mt-6">
+        <div><label for="kuantiti_pj" class="block text-sm font-semibold text-gray-700 mb-2"> 1. Kuantiti Baju PJ </label> <select id="kuantiti_pj" name="kuantiti_pj" class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition-all"> <option value="0">0</option> <option value="1">1</option> <option value="2">2</option> <option value="3">3</option> <option value="4">4</option> <option value="5">5</option> </select>
+        </div>
+        <div id="size_pj_section" style="display: none;"><label for="saiz_pj" class="block text-sm font-semibold text-gray-700 mb-2"> 2. Saiz Baju PJ <span class="text-red-500">*</span> </label> <select id="saiz_pj" name="saiz_pj" class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition-all"> <option value="">Sila Pilih Saiz</option> <optgroup label="Saiz Kanak-kanak"> <option value="24">24</option> <option value="26">26</option> <option value="28">28</option> <option value="30">30</option> <option value="32">32</option> </optgroup> <optgroup label="Saiz Dewasa"> <option value="XS">XS</option> <option value="S">S</option> <option value="M">M</option> <option value="L">L</option> <option value="XL">XL</option> <option value="2XL">2XL</option> <option value="3XL">3XL</option> </optgroup> </select>
+        </div>
+       </div>
+      </fieldset>
+      <fieldset class="fieldset-style"><legend class="legend-style">C. Tempahan Baju Sukan (T-Shirt Berkolar)</legend>
+       <div class="grid md:grid-cols-2 gap-6 mt-6">
+        <div><label for="kuantiti_sukan" class="block text-sm font-semibold text-gray-700 mb-2"> 1. Kuantiti Baju Sukan </label> <select id="kuantiti_sukan" name="kuantiti_sukan" class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition-all"> <option value="0">0</option> <option value="1">1</option> <option value="2">2</option> <option value="3">3</option> <option value="4">4</option> <option value="5">5</option> </select>
+        </div>
+        <div id="size_sukan_section" style="display: none;"><label for="saiz_sukan" class="block text-sm font-semibold text-gray-700 mb-2"> 2. Saiz Baju Sukan <span class="text-red-500">*</span> </label> <select id="saiz_sukan" name="saiz_sukan" class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition-all"> <option value="">Sila Pilih Saiz</option> <optgroup label="Saiz Kanak-kanak"> <option value="24">24</option> <option value="26">26</option> <option value="28">28</option> <option value="30">30</option> <option value="32">32</option> </optgroup> <optgroup label="Saiz Dewasa"> <option value="XS">XS</option> <option value="S">S</option> <option value="M">M</option> <option value="L">L</option> <option value="XL">XL</option> <option value="2XL">2XL</option> <option value="3XL">3XL</option> </optgroup> </select>
+        </div>
+       </div>
+      </fieldset>
+      <fieldset class="fieldset-style"><legend class="legend-style">D. Pembayaran &amp; Pengesahan</legend>
+       <div class="mt-6">
+        <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">💵 Maklumat Harga</h3>
+        <p class="text-gray-600 mb-4">Harga bagi <strong>sehelai</strong> Baju PJ atau Baju Sukan, tanpa mengira saiz, ialah <strong>RM30.00</strong>.</p>
+        <div class="summary-box">
+         <div class="flex justify-between items-center mb-2"><span class="font-semibold">Jumlah Kuantiti Baju (PJ + Sukan):</span> <span id="total_quantity" class="text-xl font-bold text-green-600">0 helai</span>
+         </div>
+         <div class="flex justify-between items-center"><span class="font-semibold text-lg">Jumlah Keseluruhan:</span> <span class="text-2xl font-bold text-green-600">RM <span id="total_price">0.00</span></span>
+         </div><input type="hidden" id="final_total_price" name="jumlah_keseluruhan" value="0.00">
+        </div>
+        <div class="mt-6"><label class="block text-sm font-semibold text-gray-700 mb-3"> Mode Pembayaran <span class="text-red-500">*</span> </label>
+         <div class="radio-group"><label class="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-green-300 transition-colors"> <input type="radio" id="transfer" name="mode_pembayaran" value="Online Transfer" required class="mr-3">
+           <div>
+            <div class="font-semibold">
+             Online Transfer
+            </div>
+            <div class="text-sm text-gray-600">
+             Transfer ke akaun bank
+            </div>
+           </div></label> <label class="flex items-center p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:border-green-300 transition-colors"> <input type="radio" id="cash" name="mode_pembayaran" value="Tunai (Cash)" class="mr-3">
+           <div>
+            <div class="font-semibold">
+             Tunai (Cash)
+            </div>
+            <div class="text-sm text-gray-600">
+             Bayar di sekolah
+            </div>
+           </div></label>
+         </div>
+        </div>
+        <div class="mt-6"><label for="no_telefon" class="block text-sm font-semibold text-gray-700 mb-2"> Nombor Telefon Ibu Bapa/Penjaga <span class="text-red-500">*</span> </label> <input type="tel" id="no_telefon" name="no_telefon" pattern="[0-9]{10,}" required placeholder="Contoh: 0123456789" class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition-all">
+        </div>
+        <div id="online_transfer_section" style="display: none;" class="mt-6">
+         <div class="bank-info">
+          <h4 class="font-bold text-amber-800 mb-3 text-lg">📋 Butiran Akaun Bank</h4>
+          <div class="space-y-2">
+           <p><strong>BANK:</strong> BANK SIMPANAN NASIONAL (BSN)</p>
+           <p><strong>NO. AKAUN:</strong> 1419‍8290‍0005‍3962</p>
+           <p><strong>NAMA:</strong> MAREYANA BINTI MUHAMAD</p>
+          </div>
+         </div>
+         <div class="mt-4"><label for="resit_pembayaran" class="block text-sm font-semibold text-gray-700 mb-2"> Upload Resit Pembayaran <span class="text-red-500">*</span> </label>
+          <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-green-400 transition-colors"><input type="file" id="resit_pembayaran" name="resit_pembayaran" accept="image/*,.pdf" class="hidden"> <label for="resit_pembayaran" class="cursor-pointer">
+            <div id="upload-area">
+             <svg class="w-12 h-12 mx-auto mb-4 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+             </svg>
+             <p class="text-gray-600 mb-2">Klik untuk upload resit pembayaran</p>
+             <p class="text-sm text-gray-500">PNG, JPG, PDF (Max: 5MB)</p>
+            </div></label>
+          </div>
+          <div id="file-preview" class="mt-4 hidden">
+           <div class="flex items-center p-3 bg-green-50 border border-green-200 rounded-lg">
+            <svg class="w-8 h-8 text-green-500 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <div class="flex-1">
+             <p class="font-medium text-green-800" id="file-name"></p>
+             <p class="text-sm text-green-600" id="file-size"></p>
+            </div><button type="button" onclick="removeFile()" class="text-red-500 hover:text-red-700">
+             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+             </svg></button>
+           </div>
+          </div>
+          <p class="text-sm text-amber-600 mt-2"><em>*Wajib upload resit jika Mode Pembayaran adalah Online Transfer.</em></p>
+         </div>
+         <div class="mt-4"><label for="nota_pembayaran" class="block text-sm font-semibold text-gray-700 mb-2"> Nota Tambahan (Pilihan) </label> <textarea id="nota_pembayaran" name="nota_pembayaran" rows="2" placeholder="Rujukan pembayaran atau maklumat tambahan (contoh: Transfer dari Maybank - Ref: TXN123456789)" class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition-all"></textarea>
+         </div>
+        </div>
+       </div>
+      </fieldset>
+      
+      <div class="text-center pt-6 space-y-4">
+        <button type="submit" id="submitBtn" class="bg-gradient-to-br from-emerald-600 to-emerald-700 text-white px-8 py-4 rounded-full text-lg font-semibold inline-flex items-center space-x-2 transition-all hover:-translate-y-1 hover:shadow-lg"> 
+          <span id="submitText">Hantar</span>
+          <svg id="submitIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+          </svg>
+        </button>
+       <div><button type="button" id="newOrderBtn" onclick="startNewOrder()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-full text-base font-semibold inline-flex items-center space-x-2 transition-all hover:transform hover:-translate-y-1">
+         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+         </svg><span>Tambah Tempahan Baru</span> </button>
+       </div>
+      </div>
+      </form>
+    </div><div id="success-section" class="bg-white rounded-2xl card-shadow p-8 fade-in" style="display: none;">
+     <div class="text-center py-8">
+      <div class="bg-green-50 border border-green-200 rounded-lg p-6">
+       <svg class="w-16 h-16 mx-auto mb-4 text-green-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+       </svg>
+       <h3 class="text-xl font-bold text-green-800 mb-2">Tempahan Berjaya Dihantar!</h3>
+       <p class="text-green-700 mb-4">Terima kasih. Tempahan anda telah diterima.</p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </main>
+  
+  <script>
+    // === URL ANDA TELAH DIMASUKKAN DI SINI ===
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzkbcns6ATs-VTEfH9VAMg8xYye9WcV7ndwMoTiRxEUYfvtGnA2StENOdgqOARqzxocsQ/exec";
+
+    // Utility functions (Fungsi-fungsi ini kebanyakannya sama seperti kod asal anda)
+    function calculateTotal() {
+      const kuantitiPj = parseInt(document.getElementById('kuantiti_pj').value) || 0;
+      const kuantitiSukan = parseInt(document.getElementById('kuantiti_sukan').value) || 0;
+      
+      const totalQuantity = kuantitiPj + kuantitiSukan;
+      const pricePerShirt = 30.00;
+      const totalPrice = totalQuantity * pricePerShirt;
+
+      document.getElementById('total_quantity').textContent = totalQuantity + ' helai';
+      document.getElementById('total_price').textContent = totalPrice.toFixed(2);
+      document.getElementById('final_total_price').value = totalPrice.toFixed(2);
+    }
+
+    function toggleSize(type) {
+      const kuantiti = document.getElementById(`kuantiti_${type}`).value;
+      const sizeSection = document.getElementById(`size_${type}_section`);
+      const sizeField = document.getElementById(`saiz_${type}`);
+
+      if (parseInt(kuantiti) > 0) {
+        sizeSection.style.display = 'block';
+        sizeField.required = true;
+      } else {
+        sizeSection.style.display = 'none';
+        sizeField.required = false;
+        sizeField.value = "";
+      }
+      calculateTotal();
+    }
+
+    function togglePaymentSection() {
+      const mode = document.querySelector('input[name="mode_pembayaran"]:checked')?.value;
+      const transferSection = document.getElementById('online_transfer_section');
+      const resitInput = document.getElementById('resit_pembayaran');
+
+      if (mode === 'Online Transfer') {
+        transferSection.style.display = 'block';
+        resitInput.required = !resitInput.dataset.fileData;
+      } else {
+        transferSection.style.display = 'none';
+        resitInput.required = false;
+        resitInput.value = "";
+        removeFile();
+      }
+    }
+
+    function handleFileUpload(input) {
+      const file = input.files[0];
+      if (!file) return;
+
+      if (file.size > 5 * 1024 * 1024) {
+        showToast("Saiz fail terlalu besar. Sila pilih fail kurang dari 5MB.", "error");
+        input.value = "";
+        return;
+      }
+
+      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'];
+      if (!allowedTypes.includes(file.type)) {
+        showToast("Jenis fail tidak disokong. Sila pilih PNG, JPG atau PDF.", "error");
+        input.value = "";
+        return;
+      }
+
+      const uploadArea = document.getElementById('upload-area');
+      const filePreview = document.getElementById('file-preview');
+      const fileName = document.getElementById('file-name');
+      const fileSize = document.getElementById('file-size');
+
+      uploadArea.style.display = 'none';
+      filePreview.classList.remove('hidden');
+      fileName.textContent = file.name;
+      fileSize.textContent = formatFileSize(file.size);
+      document.getElementById('resit_pembayaran').required = false;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        // Simpan data Base64, nama fail, dan jenis fail untuk dihantar
+        input.dataset.fileData = e.target.result;
+        input.dataset.fileName = file.name;
+        input.dataset.fileType = file.type;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function removeFile() {
+      const input = document.getElementById('resit_pembayaran');
+      const uploadArea = document.getElementById('upload-area');
+      const filePreview = document.getElementById('file-preview');
+
+      input.value = "";
+      input.dataset.fileData = "";
+      input.dataset.fileName = "";
+      input.dataset.fileType = "";
+      
+      uploadArea.style.display = 'block';
+      filePreview.classList.add('hidden');
+      
+      const mode = document.querySelector('input[name="mode_pembayaran"]:checked')?.value;
+      if (mode === 'Online Transfer') {
+        input.required = true;
+      }
+    }
+
+    function formatFileSize(bytes) {
+      if (bytes === 0) return '0 Bytes';
+      const k = 1024;
+      const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    async function handleSubmit(e) {
+      e.preventDefault();
+
+      const submitBtn = document.getElementById('submitBtn');
+      const submitText = document.getElementById('submitText');
+      const submitIcon = document.getElementById('submitIcon');
+      
+      submitBtn.disabled = true;
+      submitText.textContent = 'Menghantar...';
+      submitIcon.innerHTML = '<div class="loading"></div>';
+
+      // Kumpul data borang
+      const orderData = {
+        nama_murid: document.getElementById('nama_murid').value.trim(),
+        jantina: document.getElementById('jantina').value,
+        kelas: document.getElementById('kelas').value,
+        kuantiti_pj: parseInt(document.getElementById('kuantiti_pj').value) || 0,
+        saiz_pj: document.getElementById('saiz_pj').value || "",
+        kuantiti_sukan: parseInt(document.getElementById('kuantiti_sukan').value) || 0,
+        saiz_sukan: document.getElementById('saiz_sukan').value || "",
+        mode_pembayaran: document.querySelector('input[name="mode_pembayaran"]:checked')?.value || "",
+        no_telefon: document.getElementById('no_telefon').value.trim(),
+        nota_pembayaran: document.getElementById('nota_pembayaran').value.trim()
+      };
+      
+      const totalQuantity = orderData.kuantiti_pj + orderData.kuantiti_sukan;
+
+      // Validasi (sama seperti kod asal)
+      if (!orderData.nama_murid) {
+        showToast("Sila masukkan nama murid.", "error");
+        resetSubmitButton();
+        return;
+      }
+      if (!orderData.jantina) {
+        showToast("Sila pilih jantina.", "error");
+        resetSubmitButton();
+        return;
+      }
+      if (!orderData.kelas) {
+        showToast("Sila pilih kelas.", "error");
+        resetSubmitButton();
+        return;
+      }
+      if (totalQuantity === 0) {
+        showToast("Sila pilih sekurang-kurangnya satu baju untuk ditempah.", "error");
+        resetSubmitButton();
+        return;
+      }
+      if (orderData.kuantiti_pj > 0 && !orderData.saiz_pj) {
+        showToast("Sila pilih saiz baju PJ.", "error");
+        resetSubmitButton();
+        return;
+      }
+      if (orderData.kuantiti_sukan > 0 && !orderData.saiz_sukan) {
+        showToast("Sila pilih saiz baju sukan.", "error");
+        resetSubmitButton();
+        return;
+      }
+      if (!orderData.mode_pembayaran) {
+        showToast("Sila pilih mode pembayaran.", "error");
+        resetSubmitButton();
+        return;
+      }
+      if (!orderData.no_telefon) {
+        showToast("Sila masukkan nombor telefon.", "error");
+        resetSubmitButton();
+        return;
+      }
+
+      // Semak resit
+      const resitInput = document.getElementById('resit_pembayaran');
+      if (orderData.mode_pembayaran === 'Online Transfer' && !resitInput.dataset.fileName) {
+        showToast("Sila upload resit pembayaran untuk Online Transfer.", "error");
+        resetSubmitButton();
+        return;
+      }
+      
+      // Tambah baki data untuk dihantar ke Google Apps Script
+      const pricePerShirt = 30.00;
+      orderData.jumlah_keseluruhan = (totalQuantity * pricePerShirt).toFixed(2);
+      orderData.tarikh_tempahan = new Date().toISOString();
+      orderData.status = "Menunggu Pengesahan";
+
+      // Tambah data fail (jika ada) untuk dihantar
+      if (resitInput.dataset.fileName) {
+        orderData.resit_file_name = resitInput.dataset.fileName;
+        orderData.resit_file_type = resitInput.dataset.fileType;
+        orderData.resit_file_data = resitInput.dataset.fileData; // Ini data Base64
+      }
+
+      // UBAH SUAI UTAMA: Guna 'fetch' untuk hantar ke Google Apps Script
+      try {
+        const response = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          mode: 'cors', // Penting untuk panggilan cross-origin
+          body: JSON.stringify(orderData)
+        });
+
+        const result = await response.json();
+
+        if (result.status === "success") {
+          // Berjaya! Lakukan perkara yang sama seperti kod asal
+          showToast("Tempahan berjaya dihantar! ✅", "success");
+          document.getElementById('orderForm').reset();
+          removeFile();
+          toggleSize('pj');
+          toggleSize('sukan');
+          calculateTotal();
+          
+          const transferSection = document.getElementById('online_transfer_section');
+          transferSection.style.display = 'none';
+          
+          // Papar seksyen 'success'
+          const successSection = document.getElementById('success-section');
+          successSection.style.display = 'block';
+          successSection.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          // Berlaku ralat di sebelah Google Apps Script
+          console.error("Apps Script error:", result.message);
+          showToast(`Ralat menyimpan data: ${result.message}. Sila cuba lagi.`, "error");
+        }
+      } catch (error) {
+        // Berlaku ralat rangkaian atau fetch
+        console.error("Submit error:", error);
+        showToast(`Ralat sistem: ${error.message}. Sila cuba lagi.`, "error");
+      }
+
+      resetSubmitButton();
+    }
+
+    function resetSubmitButton() {
+      const submitBtn = document.getElementById('submitBtn');
+      const submitText = document.getElementById('submitText');
+      const submitIcon = document.getElementById('submitIcon');
+      
+      submitBtn.disabled = false;
+      submitText.textContent = 'Hantar';
+      submitIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>';
+    }
+
+    function showToast(message, type) {
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      toast.textContent = message;
+      document.body.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.remove();
+      }, 5000);
+    }
+
+    function toggleSizeChart() {
+      const sizeChart = document.getElementById('size-chart');
+      const chartIcon = document.getElementById('chart-icon');
+      
+      if (sizeChart.classList.contains('hidden')) {
+        sizeChart.classList.remove('hidden');
+        chartIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>';
+      } else {
+        sizeChart.classList.add('hidden');
+        chartIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>';
+      }
+    }
+
+    function startNewOrder() {
+      document.getElementById('orderForm').reset();
+      removeFile();
+      toggleSize('pj');
+      toggleSize('sukan');
+      calculateTotal();
+      
+      const transferSection = document.getElementById('online_transfer_section');
+      transferSection.style.display = 'none';
+      
+      // Sembunyi seksyen 'success'
+      const successSection = document.getElementById('success-section');
+      successSection.style.display = 'none';
+
+      document.querySelector('header').scrollIntoView({ behavior: 'smooth' });
+      showToast("Borang baru telah disediakan untuk tempahan seterusnya!", "success");
+    }
+
+    // Event Listeners
+    document.addEventListener('DOMContentLoaded', () => {
+      // Tiada lagi 'initializeDataSDK()'
+      
+      const form = document.getElementById('orderForm');
+      if (form) {
+        form.addEventListener('submit', handleSubmit);
+      }
+      
+      // Handler muat naik fail
+      const fileInput = document.getElementById('resit_pembayaran');
+      if (fileInput) {
+        fileInput.addEventListener('change', (e) => handleFileUpload(e.target));
+      }
+      
+      // Logik Kuantiti/Saiz
+      document.getElementById('kuantiti_pj').addEventListener('change', () => toggleSize('pj'));
+      document.getElementById('kuantiti_sukan').addEventListener('change', () => toggleSize('sukan'));
+      
+      // Logik Pembayaran
+      document.querySelectorAll('input[name="mode_pembayaran"]').forEach(radio => {
+        radio.addEventListener('change', togglePaymentSection);
+      });
+      
+      // Persediaan awal
+      toggleSize('pj');
+      toggleSize('sukan');
+      calculateTotal();
+    });
+  </script>
+ </body>
+</html>
