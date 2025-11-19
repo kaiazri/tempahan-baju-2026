@@ -3,7 +3,7 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sistem Tempahan Baju Sekolah</title>
+  <title>Tempahan Baju PJ Tahun 1 (2026)</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body { box-sizing: border-box; }
@@ -22,7 +22,6 @@
     .toast { position: fixed; top: 20px; right: 20px; padding: 16px 24px; border-radius: 8px; color: white; font-weight: 600; z-index: 1000; max-width: 400px; animation: slideIn 0.3s ease-out; }
     .toast.success { background: #10b981; }
     .toast.error { background: #ef4444; }
-    @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
   </style>
   <style>@view-transition { navigation: auto; }</style>
  </head>
@@ -33,7 +32,7 @@
     <div class="text-center">
      <h1 class="text-4xl md:text-5xl font-bold mb-2">SK Pandan Jaya</h1>
      <p class="text-2xl mb-2">Borang Tempahan Baju PJ</p>
-     <p class="text-xl text-green-100">Sesi 2026</p>
+     <div class="mt-2 inline-block bg-yellow-400 text-emerald-900 rounded-lg px-4 py-1 font-bold text-lg">KHAS TAHUN 1 (SESI 2026)</div>
      <div class="mt-4 inline-block bg-white bg-opacity-20 rounded-full px-6 py-2"><span class="text-lg font-semibold">💰 RM30.00 sehelai</span>
      </div>
     </div>
@@ -47,16 +46,33 @@
       
       <fieldset class="fieldset-style"><legend class="legend-style">A. Maklumat Murid</legend>
        <div class="grid md:grid-cols-2 gap-6 mt-6">
-        <div><label for="nama_murid" class="block text-sm font-semibold text-gray-700 mb-2"> 1. Nama Murid <span class="text-red-500">*</span> </label> <input type="text" id="nama_murid" name="nama_murid" required class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition-all">
+        
+        <div>
+            <label for="kelas" class="block text-sm font-semibold text-gray-700 mb-2"> 1. Pilih Kelas <span class="text-red-500">*</span> </label> 
+            <select id="kelas" name="kelas" required class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition-all bg-white">
+                <option value="">-- Sila Pilih Kelas Dahulu --</option>
+            </select>
         </div>
-        <div><label for="jantina" class="block text-sm font-semibold text-gray-700 mb-2"> 2. Jantina <span class="text-red-500">*</span> </label> <select id="jantina" name="jantina" required class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition-all"> <option value="">Sila Pilih</option> <option value="Lelaki">Lelaki</option> <option value="Perempuan">Perempuan</option> </select>
+
+        <div>
+            <label for="nama_murid" class="block text-sm font-semibold text-gray-700 mb-2"> 2. Nama Murid <span class="text-red-500">*</span> </label> 
+            <select id="nama_murid" name="nama_murid" required disabled class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition-all bg-gray-100 cursor-not-allowed">
+                <option value="">-- Sila Pilih Kelas Dahulu --</option>
+            </select>
         </div>
        </div>
-       <div class="mt-6"><label for="kelas" class="block text-sm font-semibold text-gray-700 mb-2"> 3. Kelas <span class="text-red-500">*</span> </label> <select id="kelas" name="kelas" required class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition-all"> <option value="">Sila Pilih Kelas</option> <optgroup label="Tahun 1"> <option value="1 Berlian">1 Berlian</option> <option value="1 Nilam">1 Nilam</option> <option value="1 Permata">1 Permata</option> <option value="1 Zamrud">1 Zamrud</option> </optgroup> <optgroup label="Tahun 2"> <option value="2 Berlian">2 Berlian</option> <option value="2 Nilam">2 Nilam</option> <option value="2 Permata">2 Permata</option> <option value="2 Zamrud">2 Zamrud</option> </optgroup> <optgroup label="Tahun 3"> <option value="3 Berlian">3 Berlian</option> <option value="3 Nilam">3 Nilam</option> <option value="3 Permata">3 Permata</option> <option value="3 Zamrud">3 Zamrud</option> </optgroup> <optgroup label="Tahun 4"> <option value="4 Berlian">4 Berlian</option> <option value="4 Nilam">4 Nilam</option> <option value="4 Permata">4 Permata</option> <option value="4 Zamrud">4 Zamrud</option> </optgroup> <optgroup label="Tahun 5"> <option value="5 Berlian">5 Berlian</option> <option value="5 Nilam">5 Nilam</option> <option value="5 Permata">5 Permata</option> <option value="5 Zamrud">5 Zamrud</option> </optgroup> <optgroup label="Tahun 6"> <option value="6 Berlian">6 Berlian</option> <option value="6 Nilam">6 Nilam</option> <option value="6 Permata">6 Permata</option> <option value="6 Zamrud">6 Zamrud</option> </optgroup> </select>
+
+       <div class="mt-6">
+        <label for="jantina" class="block text-sm font-semibold text-gray-700 mb-2"> 3. Jantina (Automatik) <span class="text-red-500">*</span> </label> 
+        <select id="jantina" name="jantina" required class="w-full px-4 py-3 border border-gray-300 rounded-lg input-focus transition-all bg-gray-50"> 
+            <option value="">Sila Pilih Nama Dahulu</option> 
+            <option value="Lelaki">Lelaki</option> 
+            <option value="Perempuan">Perempuan</option> 
+        </select>
        </div>
       </fieldset>
 
-      <fieldset class="fieldset-style"><legend class="legend-style">B. Tempahan Baju PJ (Pendidikan Jasmani)</legend>
+      <fieldset class="fieldset-style"><legend class="legend-style">B. Tempahan Baju PJ</legend>
        <div class="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
         <h4 class="font-bold text-blue-800 mb-3 flex items-center">📏 Panduan Saiz Baju (Size Chart) <button type="button" onclick="toggleSizeChart()" class="ml-2 text-blue-600 hover:text-blue-800">
          <svg id="chart-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -192,13 +208,216 @@
   </main>
   
   <script>
-    // === URL ANDA TELAH DIMASUKKAN DI SINI ===
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzkbcns6ATs-VTEfH9VAMg8xYye9WcV7ndwMoTiRxEUYfvtGnA2StENOdgqOARqzxocsQ/exec";
+
+    // DATA SEBENAR MURID TAHUN 1 2026
+    const DATA_SEKOLAH = {
+      "1 DIAMOND": [
+        { n: "MUHAMMAD AQEEF RIYARD BIN MOHD ISHAM", g: "Lelaki" },
+        { n: "MUHAMMAD AQEEF RAYQAL BIN MOHD ISHAM", g: "Lelaki" },
+        { n: "AQEEL HAKIMI BIN MUHAMMAD ALIF", g: "Lelaki" },
+        { n: "ANAN ANAQI BIN JAINAL", g: "Lelaki" },
+        { n: "MUHAMMAD AYDAN NAUFAL BIN AMIR", g: "Lelaki" },
+        { n: "MUHAMMAD AMMAR SUFI ZIQRI BIN ABDUL WALI", g: "Lelaki" },
+        { n: "MUHAMMAD RAFA HAZIQ BIN MUHAMMAD KHAIRIL", g: "Lelaki" },
+        { n: "ARIQ ILYAS BIN MOHAMAD AMIRUL FAIZ", g: "Lelaki" },
+        { n: "ZAED AARIZ RIZQI", g: "Lelaki" },
+        { n: "MUHAMMAD ARDHANI BIN ZAINI SHAMSHIDI", g: "Lelaki" },
+        { n: "AFFAN DANIEL BIN MUHAMMAD AZZUWAN", g: "Lelaki" },
+        { n: "UWAIS HAIYAN BIN HASZRULNIZAM", g: "Lelaki" },
+        { n: "MUHAMMAD ZAYDAN ALFAREZI BIN SUPRIADI", g: "Lelaki" },
+        { n: "MUHAMMAD RAYYAN MIKAIL BIN MOHAMMAD RASHID", g: "Lelaki" },
+        { n: "FATA YAQIN BIN MUHAMMAD YUSUF", g: "Lelaki" },
+        { n: "NOAH ARRAID BIN NOR AZIZI", g: "Lelaki" },
+        { n: "MUHAMMAD SYAKIB ANAQI BIN MUHAMMAD 'AKIF", g: "Lelaki" },
+        { n: "HANA ERYNA BINTI SAFARI", g: "Perempuan" },
+        { n: "AIN FARIHA BINTI SHAMSUL", g: "Perempuan" },
+        { n: "SITI NUR IMAN BINTI MUHAMMAD AL-AKHIR", g: "Perempuan" },
+        { n: "NUR AFEEYA IMANI BINTI MOHAMMAD ASYRAF", g: "Perempuan" },
+        { n: "CAHAYA SOPHIA BINTI MOHD NAJIB", g: "Perempuan" },
+        { n: "NURZAAHIRAH BINTI HENDRI", g: "Perempuan" },
+        { n: "NUR RAISHA FAQIHAH BINTI MOHAMAD FAZZIL NAZIRI", g: "Perempuan" },
+        { n: "NUR ELNADA AISYA BINTI MOHD EMY", g: "Perempuan" },
+        { n: "NUR ZAYRA MEDINA BINTI MUHAMMAD AKIF", g: "Perempuan" },
+        { n: "MAWAR DAMIA SARA BINTI MOHD FARHAN", g: "Perempuan" },
+        { n: "NUR ZARA ARISSA BINTI MOHAMAD FIRDAUS", g: "Perempuan" },
+        { n: "WAN NAURA AAFIYAH BINTI WAN AZLAN", g: "Perempuan" },
+        { n: "SITI NUR HAURA BINTI AHMAD HUSAINI", g: "Perempuan" },
+        { n: "NUR ANINA AAFIYAH BINTI ADSNAN", g: "Perempuan" },
+        { n: "NUR AQILAH AIRA BINTI HAZWIN", g: "Perempuan" },
+        { n: "SITI AFIYAH BINTI MUHAMMAD NAZRIN", g: "Perempuan" },
+        { n: "ARIANA SOFIA BINTI SHAFIQ AHMAD", g: "Perempuan" }
+      ],
+      "1 SAPPHIRE": [
+        { n: "AIRIL ZAFRAN BIN MUHAMMAD HADI AIZUDDIN", g: "Lelaki" },
+        { n: "MUHAMMAD ISRAFIL BIN ABDUL RAKIB", g: "Lelaki" },
+        { n: "GIBRAN NOAH BIN MOHD FAZLI", g: "Lelaki" },
+        { n: "MUHAMAD AZAD AFEEF BIN MUHAMAD AZRI", g: "Lelaki" },
+        { n: "LUQMAN HAKIM BIN AMIR AZRIN", g: "Lelaki" },
+        { n: "MUHAMMAD HADAIN BIN ARHIMI", g: "Lelaki" },
+        { n: "MUHAMMAD RAYYAN BIN ROSLAN", g: "Lelaki" },
+        { n: "MUHAMMAD QAYL QAYYUM BIN SHAHRUL RAMDHAN", g: "Lelaki" },
+        { n: "AHMAD NUR RAMADHAN BIN ANAS", g: "Lelaki" },
+        { n: "MUHAMMAD DAIYAN HAQEM BIN MOHD HAIKAL CHOO", g: "Lelaki" },
+        { n: "MUHAMMAD SAYF BIN MOHD MUSTAKHIM", g: "Lelaki" },
+        { n: "ARIQ HANIF BIN ABDUL HADI", g: "Lelaki" },
+        { n: "AISY ZIYAD BIN ZAID", g: "Lelaki" },
+        { n: "MUHAMMAD JIBRIL AZIM BIN ABDUL RAZZAK", g: "Lelaki" },
+        { n: "MUHAMMAD ZUHAIR JAIDZ BIN ABDUL RAHIM", g: "Lelaki" },
+        { n: "MUHAMMAD FAYYADH BIN HISYAM", g: "Lelaki" },
+        { n: "AHMAD AISY HARITH BIN AHMAD SHAFIQUL IKHRAM", g: "Lelaki" },
+        { n: "NAYLAA FALISHA BINTI NUR FAIS", g: "Perempuan" },
+        { n: "ADELISHA MAYRA BINTI MUHAMMAD AMIRULLAH", g: "Perempuan" },
+        { n: "NUR ORKED AURORA BINTI MOHD ZULHAIRI", g: "Perempuan" },
+        { n: "NUR RAIQA RIZQAH BINTI RAZLAN", g: "Perempuan" },
+        { n: "NUR AFFIA AULIYA BINTI AFFZARIMAN", g: "Perempuan" },
+        { n: "NUR KHAYLA HAZWANI BINTI MOHD KURNIAWAN", g: "Perempuan" },
+        { n: "NUR HAWA TANISYA BINTI KAMARUL ASYRAF", g: "Perempuan" },
+        { n: "NUR INARA MAISARA BINTI ABDUL MALIK", g: "Perempuan" },
+        { n: "NUR AALIYA BATRISYIA BINTI MOHD ZAIDI", g: "Perempuan" },
+        { n: "SOFEA AISY DARLEENA BINTI SALIHIN", g: "Perempuan" },
+        { n: "IMAN SAFIYA BINTI SOFFY SYAIRAZI", g: "Perempuan" },
+        { n: "WAN NURIN EYRA ARIESYA BINTI WAN EZUANSHAH", g: "Perempuan" },
+        { n: "SOFEA MARYAM BINTI ZAIRI", g: "Perempuan" },
+        { n: "SITI AFINA BINTI MOHD HAFIZAM", g: "Perempuan" },
+        { n: "NUR RADWA FAIHA BINTI MOHD FAZRIN", g: "Perempuan" },
+        { n: "NUR QASEH BINTI MOHD ZUHAIRI", g: "Perempuan" },
+        { n: "QISYA ERYNA BINTI ABD AZIZ", g: "Perempuan" },
+        { n: "ADIRA AZZALEA BINTI HERMAWAN SUSANTOO", g: "Perempuan" }
+      ],
+      "1 RUBY": [
+        { n: "MUHAMMAD FAIZ RUZAIN BIN MOHD FAUZI", g: "Lelaki" },
+        { n: "AHMAD IDRUS HAMKA BIN MUHAMMAD BADRUL HISYAM", g: "Lelaki" },
+        { n: "NOR JAEI BIN MOHMED SABUR ALAM", g: "Lelaki" },
+        { n: "AISY ZULKARNAIN BIN ZAMIL AMIN", g: "Lelaki" },
+        { n: "MUHAMMAD AZZ KAYRILL ARSYAD BIN MOHD AZRULSAN", g: "Lelaki" },
+        { n: "MUHAMMAD YASSIN BIN MUHAMMAD FARIES", g: "Lelaki" },
+        { n: "MUHAMMAD RAYYAN BIN KAMARUDIN", g: "Lelaki" },
+        { n: "FATEH YASEF BIN FARID YASEF", g: "Lelaki" },
+        { n: "DANIAL FATIH BIN MOHAMMAD TAUFIK", g: "Lelaki" },
+        { n: "MUHAMMAD AIDAN HARRAZ BIN MOHAMAD IZUWANSHAH", g: "Lelaki" },
+        { n: "MUHAMMAD QAYS AZFAR BIN MOHD QUIFEI", g: "Lelaki" },
+        { n: "RAYYAN SHAFIQ BIN ROSLI", g: "Lelaki" },
+        { n: "AHMAD ARIF IMAN BIN MOHAMMAD HAFIZ", g: "Lelaki" },
+        { n: "MUHAMMAD ARIIQ MIKAEL BIN FAZLAN", g: "Lelaki" },
+        { n: "THAQIF ZAYYAD BIN MOHD NASARUDIN", g: "Lelaki" },
+        { n: "MUHAMMAD NAIM BIN SHAHRULNIZAM", g: "Lelaki" },
+        { n: "AMEER ASHRAFF BIN AMEER REDWAN", g: "Lelaki" },
+        { n: "MUHAMMAD AIMAN ZHAFRAN BIN MAHEN", g: "Lelaki" },
+        { n: "NUR KHADIJAH AZZAHARA BINTI MOHAMAD RAZAIN", g: "Perempuan" },
+        { n: "NUR ALISYA FATHIA BINTI MOHD FIRDAUS", g: "Perempuan" },
+        { n: "SHERRYNA ERISHA BINTI SAID SADIQ", g: "Perempuan" },
+        { n: "NUR IMAN AAFIYAH BINTI MUKFAHROL", g: "Perempuan" },
+        { n: "HANNAH DELISHA BINTI AZHAM", g: "Perempuan" },
+        { n: "KHAYRA HUSNA BINTI MOHD KHAIRUL ANUAR", g: "Perempuan" },
+        { n: "AMELIA IRDINA BINTI MAS IRWAN HADY", g: "Perempuan" },
+        { n: "ARIQA DINARA BINTI FIZAL ZULKHAIRI", g: "Perempuan" },
+        { n: "NUR RANIA JANNAH BINTI ABDUL AZIZ", g: "Perempuan" },
+        { n: "NUR DHIA ZAHRAA RAISSA BINTI MOHD KHAIZUDIN", g: "Perempuan" },
+        { n: "IONA ELLORA BINTI ISMA ALIFF", g: "Perempuan" },
+        { n: "ATTHIYYA SOFEA BINTI MUHAMMAD SYUKRI", g: "Perempuan" },
+        { n: "JAMAIMA KHAN BINTI JEHANGIR KHAN", g: "Perempuan" },
+        { n: "ADLYNE INARA BINTI AMIRON IKRAM", g: "Perempuan" },
+        { n: "NUR AMIRA QISTINA", g: "Perempuan" },
+        { n: "AISYA EFIYA BINTI NOREZMY AIZUL", g: "Perempuan" },
+        { n: "NUR ALINA FATHIYA BINTI AHMAD FAIZ", g: "Perempuan" },
+        { n: "NUR AQEELA FAIHA BINTI MUHAMMAD HAZRIQK", g: "Perempuan" }
+      ],
+      "1 EMERALD": [
+        { n: "MUHAMMAD ADAM FATEH BIN ABDUL FATTAH", g: "Lelaki" },
+        { n: "CHE MUHAMMAD AR RAYYAN BIN AYATULLAH KHOMENI", g: "Lelaki" },
+        { n: "MOHAMED SAFWAN", g: "Lelaki" },
+        { n: "ADAM RIFQI BIN AHMAD FIRDAUS", g: "Lelaki" },
+        { n: "ARIZ ADAM BIN AMRI", g: "Lelaki" },
+        { n: "MUHAMMAD YUSOFF MINNALLAH BIN ABDULLAH", g: "Lelaki" },
+        { n: "TARUN DEV A/L SEELAN", g: "Lelaki" },
+        { n: "MUHAMMAD RIZZQI ZAKHEEF BIN MOHD IRWAN", g: "Lelaki" },
+        { n: "MOHAMAD AL HAKIM BIN MOHD FADHIL", g: "Lelaki" },
+        { n: "HAFIY MIKAEL BIN ABDUL MALIK", g: "Lelaki" },
+        { n: "ILMAN AAKIF BIN ABDUL AZIZ", g: "Lelaki" },
+        { n: "ALIFF FAYYADH BIN AZHA", g: "Lelaki" },
+        { n: "MOHAMAD RAYYANZ BIN MOHD ZAHRI", g: "Lelaki" },
+        { n: "ADLI FAHMI BIN ADAM SAFFIAN", g: "Lelaki" },
+        { n: "MOHAMAD FATIH MIKAEL BIN MOHD FADHLI", g: "Lelaki" },
+        { n: "MUHAMMAD ARSYAH ANNAJWAN BIN JUMAKDEN", g: "Lelaki" },
+        { n: "ANIQ PUTRA BIN MUHAMMAD ZARUL SHAFIQ AHMAD ROZAINAN", g: "Lelaki" },
+        { n: "AHMAD UZAIR IMAN BIN AHMAD SYAUQI", g: "Lelaki" },
+        { n: "MOHAMAD HAFIZ SYAHMI BIN SUHAIMI", g: "Lelaki" },
+        { n: "SARAH YASMEEN BINTI MUHAMMAD ABDELLAH", g: "Perempuan" },
+        { n: "MIA ALEESA BINTI MOHAMAD KHAIRUL", g: "Perempuan" },
+        { n: "NEERAJAANA A/P JEEVAN", g: "Perempuan" },
+        { n: "NUR DANIN AIZZAH BINTI NOR AIZUDDIN", g: "Perempuan" },
+        { n: "NUR ARRIANA DELISHA BINTI MUHAMMAD NUR SAIFUL", g: "Perempuan" },
+        { n: "NUR AQEESYA SOFEA BINTI ABDUL AZIM", g: "Perempuan" },
+        { n: "NIA SAFIYA BINTI MUHAMMAD HELMI FARID", g: "Perempuan" },
+        { n: "NUR AYRA BATRISYA BINTI SHUHAIRI AIZI", g: "Perempuan" },
+        { n: "NUR JANNAH BINTI AHMAD MUJAHID", g: "Perempuan" },
+        { n: "ZARA LUTHFEA BINTI HASLAM", g: "Perempuan" },
+        { n: "NUHA YUSAIROH BINTI MUHAMAD THARIQ", g: "Perempuan" },
+        { n: "SITI NUR QAMRA HADIRAH BINTI ABDUL RAHMAN", g: "Perempuan" },
+        { n: "ZULIHANNA MASYAIRA BINTI MOHD AZRIE KHAN", g: "Perempuan" },
+        { n: "NURUL AFFIYA BINTI JAMIL", g: "Perempuan" },
+        { n: "PUTRI AZUA BINTI NOR HERMAN", g: "Perempuan" },
+        { n: "NUR RANIA SHAQUENNA BINTI JAKFAR SIDIQ", g: "Perempuan" },
+        { n: "AARA ANNAILA AISYAH BINTI AANIS NUR BUKHARI", g: "Perempuan" },
+        { n: "NUR FAZZURA ALINA BINTI MOHD FAEZ", g: "Perempuan" }
+      ]
+    };
+
+    function initializeForm() {
+        const classSelect = document.getElementById('kelas');
+        
+        Object.keys(DATA_SEKOLAH).sort().forEach(className => {
+            const option = document.createElement('option');
+            option.value = className;
+            option.text = className;
+            classSelect.appendChild(option);
+        });
+
+        classSelect.addEventListener('change', updateStudentList);
+        
+        // Tambah event listener untuk auto-set jantina
+        document.getElementById('nama_murid').addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            const gender = selectedOption.dataset.jantina;
+            if (gender) {
+                document.getElementById('jantina').value = gender;
+            }
+        });
+    }
+
+    function updateStudentList() {
+        const classSelect = document.getElementById('kelas');
+        const studentSelect = document.getElementById('nama_murid');
+        const selectedClass = classSelect.value;
+
+        studentSelect.innerHTML = '<option value="">-- Sila Pilih Nama --</option>';
+        // Reset jantina juga bila kelas bertukar
+        document.getElementById('jantina').value = "";
+
+        if (selectedClass && DATA_SEKOLAH[selectedClass]) {
+            studentSelect.disabled = false;
+            studentSelect.classList.remove('bg-gray-100', 'cursor-not-allowed');
+            studentSelect.classList.add('bg-white');
+
+            const students = DATA_SEKOLAH[selectedClass].sort((a, b) => a.n.localeCompare(b.n));
+            students.forEach(student => {
+                const option = document.createElement('option');
+                option.value = student.n;
+                option.text = student.n;
+                option.dataset.jantina = student.g; // Simpan data jantina
+                studentSelect.appendChild(option);
+            });
+        } else {
+            studentSelect.disabled = true;
+            studentSelect.classList.add('bg-gray-100', 'cursor-not-allowed');
+            studentSelect.classList.remove('bg-white');
+            studentSelect.innerHTML = '<option value="">-- Sila Pilih Kelas Dahulu --</option>';
+        }
+    }
 
     function calculateTotal() {
       const kuantitiPj = parseInt(document.getElementById('kuantiti_pj').value) || 0;
-      // Baju sukan dibuang dari kiraan
-      
       const totalQuantity = kuantitiPj;
       const pricePerShirt = 30.00;
       const totalPrice = totalQuantity * pricePerShirt;
@@ -315,14 +534,12 @@
       submitText.textContent = 'Menghantar...';
       submitIcon.innerHTML = '<div class="loading"></div>';
 
-      // Kumpul data borang
       const orderData = {
-        nama_murid: document.getElementById('nama_murid').value.trim(),
-        jantina: document.getElementById('jantina').value,
+        nama_murid: document.getElementById('nama_murid').value,
         kelas: document.getElementById('kelas').value,
+        jantina: document.getElementById('jantina').value,
         kuantiti_pj: parseInt(document.getElementById('kuantiti_pj').value) || 0,
         saiz_pj: document.getElementById('saiz_pj').value || "",
-        // Tetapkan Baju Sukan kepada 0/kosong supaya Google Sheet tidak rosak
         kuantiti_sukan: 0,
         saiz_sukan: "",
         mode_pembayaran: document.querySelector('input[name="mode_pembayaran"]:checked')?.value || "",
@@ -330,12 +547,11 @@
         nota_pembayaran: document.getElementById('nota_pembayaran').value.trim()
       };
       
-      // Total quantity hanya PJ
       const totalQuantity = orderData.kuantiti_pj;
 
-      if (!orderData.nama_murid) { showToast("Sila masukkan nama murid.", "error"); resetSubmitButton(); return; }
-      if (!orderData.jantina) { showToast("Sila pilih jantina.", "error"); resetSubmitButton(); return; }
       if (!orderData.kelas) { showToast("Sila pilih kelas.", "error"); resetSubmitButton(); return; }
+      if (!orderData.nama_murid) { showToast("Sila pilih nama murid.", "error"); resetSubmitButton(); return; }
+      if (!orderData.jantina) { showToast("Sila pilih jantina.", "error"); resetSubmitButton(); return; }
       
       if (totalQuantity === 0) {
         showToast("Sila pilih sekurang-kurangnya satu baju untuk ditempah.", "error");
@@ -382,6 +598,7 @@
         if (result.status === "success") {
           showToast("Tempahan berjaya dihantar! ✅", "success");
           document.getElementById('orderForm').reset();
+          updateStudentList(); 
           removeFile();
           toggleSize('pj');
           calculateTotal();
@@ -437,6 +654,7 @@
 
     function startNewOrder() {
       document.getElementById('orderForm').reset();
+      updateStudentList(); 
       removeFile();
       toggleSize('pj');
       calculateTotal();
@@ -452,6 +670,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+      initializeForm();
       const form = document.getElementById('orderForm');
       if (form) { form.addEventListener('submit', handleSubmit); }
       
